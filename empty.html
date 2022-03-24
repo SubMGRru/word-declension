@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Склонение по падежам имен</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css" rel="stylesheet"/>
+    <script src="./addons/petrovich.min.js"></script>
+  </head>
+  <body >
+    <div class="wrapper">
+      <header class="navbar navbar-expand-md navbar-light d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href=".">
+              Склонение по падежам имен, фамилий, отчеств
+            </a>
+          </h1>
+        </div>
+      </header>
+      <div class="page-wrapper">
+        <div class="container-xl">
+          <!-- Page title -->
+          <div class="page-header d-print-none">
+            <div class="row align-items-center">
+              <div class="col">
+                <div class="mb-3">
+                  <label class="form-label">Фамилия</label>
+                  <input type="text" class="form-control" name="input1" placeholder="Смирнов" id="firstname">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Имя</label>
+                  <input type="text" class="form-control" name="input2" placeholder="Иван" id="lastname">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Отчество</label>
+                  <input type="text" class="form-control" name="input3" placeholder="Алексеевич" id="middlename">
+                </div>
+                <div class="mb-3">
+                  <div class="form-label">Новый падеж</div>
+                  <select class="form-select" id="change_case" name="change_case">
+                    <option value="nominative">Именительный</option>
+                    <option value="genitive">Родительный</option>
+                    <option value="dative">Дательный</option>
+                    <option value="accusative">Винительный</option>
+                    <option value="instrumental">Творительный</option>
+                    <option value="prepositional">Предложный</option>
+                  </select> 
+                </div>
+                <button type="submit" class="btn btn-primary ms-auto" onclick="call_caseMove();">Просклонять!</button>
+              </div>
+              <div class="col mt-4">
+                <div class="mt-4">
+                  <div class="mt-4">
+                    <label class="form-label">Результат <span class="form-label-description">Размер: без ограничений</span></label>
+                    <textarea id="result_box" class="form-control" name="example-textarea-input" rows="6" placeholder="Ошибка, попробуйте позже." readonly="readonly">Пока здесь пусто. Отправьте запрос на склонение, и результат его выполнения отобразится прямо здесь!</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <!-- Content here -->
+          </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-lg-auto ms-lg-auto">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item"><a href="./docs/index.html" class="link-secondary">Documentation</a></li>
+                  <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
+                  <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                  <li class="list-inline-item">
+                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                      Sponsor
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2022
+                    <a href="." class="link-secondary">Tabler</a>.
+                    All rights reserved.
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="./changelog.html" class="link-secondary" rel="noopener">
+                      v1.0.0-beta5
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js"></script>
+    <script src="./dist/js/demo.min.js"></script>
+    <script>
+      function call_caseMove(){
+          var person = {
+              first: document.getElementById('firstname').value,
+              middle: document.getElementById('middlename').value,
+              last: document.getElementById('lastname').value
+          };
+          var result = petrovich(person, document.getElementById('change_case').value);
+          var gender_Readable = "неизвестный";
+          if(result.gender == "male"){
+              gender_Readable = "мужской";
+          }else if(result.gender == "female"){
+              gender_Readable = "женский";
+          }else if(result.gender == "androgynous"){
+              gender_Readable = "андрогинный";
+          }
+          document.getElementById("result_box").innerHTML= "Имя: " + result.first + "&#10;Фамилия: " + result.last + "&#10;Отчество: " + result.middle + "&#10;ФИО: " + result.last + " " + result.first + " " + result.middle + "&#10;Пол: " + gender_Readable + "&#10;";
+      }
+  </script>
+  </body>
+</html>

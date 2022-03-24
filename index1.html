@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <label>Имя: <input id="firstname" type="text"></input></label><br>
+    <label>Фамилия: <input id="lastname" type="text"></input></label><br>
+    <label>Отчество: <input id="middlename" type="text"></input></label><br>
+    <!--<p>Укажите пол:</p>
+    <input id="gender" type="text"></input>
+    <p>* - пол можно не указывать, если в поле выше Вы укажете Отчество</p>-->
+    <br>
+    <label for="change_case">Перевевести к падежу:</label>
+    <select id="change_case" name="change_case">
+      <option value="nominative">Именительный</option>
+      <option value="genitive">Родительный</option>
+      <option value="dative">Дательный</option>
+      <option value="accusative">Винительный</option>
+      <option value="instrumental">Творительный</option>
+      <option value="prepositional">Предложный</option>
+    </select> 
+    <button id="call_caseMove" onclick="call_caseMove();">Склонить</button>
+    <br><br>
+    <p>Результат:<br><code><span id="result_box">Запрос на склонение еще не выполняется, результат появится сразу,<br>как только Вы запросите склонение следующей фразы! (результат появится тут!).</span></code></p>
+</body>
+
+<script src="./addons/petrovich.min.js"></script>
+
+<script>
+    function call_caseMove(){
+        var person = {
+            first: document.getElementById('firstname').value,
+            middle: document.getElementById('middlename').value,
+            last: document.getElementById('lastname').value
+        };
+        var result = petrovich(person, document.getElementById('change_case').value);
+        var gender_Readable = "неизвестный";
+        if(result.gender == "male"){
+            gender_Readable = "мужской";
+        }else if(result.gender == "female"){
+            gender_Readable = "женский";
+        }else if(result.gender == "androgynous"){
+            gender_Readable = "андрогинный";
+        }
+        document.getElementById("result_box").innerHTML= "Имя: " + result.first + "<br>Фамилия: " + result.last + "<br>Отчество: " + result.middle + "<br>ФИО: " + result.last + " " + result.first + " " + result.middle + "<br>Пол: " + gender_Readable + "<br>";
+    }
+</script>
+
+</html>

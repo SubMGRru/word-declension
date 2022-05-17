@@ -124,8 +124,13 @@
           if(document.getElementById("middlename").value == ''){
             let myModal = new bootstrap.Modal(document.getElementById('modal-required-field'), {});
             myModal.show();
+          }else{
+            proccessData();
           }
-          var person = {
+      }
+      
+      function proccessData(){
+        var person = {
               first: data_firstname = document.getElementById('firstname').value,
               middle: data_middlename = document.getElementById('middlename').value,
               last: data_lastname = document.getElementById('lastname').value

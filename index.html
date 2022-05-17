@@ -116,17 +116,26 @@
     <script src="./dist/js/tabler.min.js"></script>
     <script src="./dist/js/demo.min.js"></script>
     <script>
+      var data_firstname;
+      var data_middlename;
+      var data_lastname;
+      
+      var has_errors;
+      
       function call_caseMove(){
-          var data_firstname = document.getElementById('firstname').value;
-          var data_middlename = document.getElementById('middlename').value;
-          var data_lastname = document.getElementById('lastname').value;
+        
+          has_errors = false; //0 - no, 1 - yes;
+        
+          data_firstname = document.getElementById('firstname').value.replace(/[^а-яёА-ЯЁ]/g,"");
+          data_middlename = document.getElementById('middlename').value.replace(/[^а-яёА-ЯЁ]/g,"");
+          data_lastname = document.getElementById('lastname').value.replace(/[^а-яёА-ЯЁ]/g,"");
 
           if(document.getElementById("middlename").value == ''){
             let myModal = new bootstrap.Modal(document.getElementById('modal-required-field'), {});
             myModal.show();
-          }else{
-            proccessData();
+            has_errors = true;
           }
+        
       }
       
       function proccessData(){
